@@ -1,7 +1,6 @@
 const { DynamoDBDocumentClient, UpdateCommand } = require("@aws-sdk/lib-dynamodb");
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { ddbClient } = require('./libs/ddbClient')
 
-const REGION = "us-east-1";
 const TABLE_NAME = "wodays"
 
 const marshallOptions = {
@@ -20,9 +19,8 @@ const unmarshallOptions = {
 
 const translateConfig = { marshallOptions, unmarshallOptions };
 
-// Create the clients.
-const client = new DynamoDBClient({ region: REGION });
-const ddbDocClient = DynamoDBDocumentClient.from(client, translateConfig);
+// Create the client
+const ddbDocClient = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 
 // Set the parameters
 const params = {
@@ -57,4 +55,7 @@ const run = async () => {
     console.log("Error", err);
   }
 };
-run();
+
+module.exports = {
+  run
+}
