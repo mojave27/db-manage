@@ -1,5 +1,5 @@
 const { DynamoDBClient, ListTablesCommand } = require("@aws-sdk/client-dynamodb");
-const { update } = require('./dbUpdate')
+const { updateDateEpoch } = require('./dbUpdate')
 
 // Set the AWS Region
 const REGION = "us-east-1"
@@ -18,4 +18,4 @@ const listTables = async () => {
 
 listTables()
 
-update()
+updateDateEpoch(22, "789101112")
